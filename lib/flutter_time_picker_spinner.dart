@@ -230,17 +230,19 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
       SizedBox(
         width: _getItemWidth(),
         height: _getItemHeight()! * 3,
-        child: spinner(
-          hourController,
-          _getHourCount(),
-          currentSelectedHourIndex,
-          isHourScrolling,
-          1,
-          (index) {
-            currentSelectedHourIndex = index;
-            isHourScrolling = true;
-          },
-          () => isHourScrolling = false,
+        child: Center(
+          child: spinner(
+            hourController,
+            _getHourCount(),
+            currentSelectedHourIndex,
+            isHourScrolling,
+            1,
+                (index) {
+              currentSelectedHourIndex = index;
+              isHourScrolling = true;
+            },
+                () => isHourScrolling = false,
+          ),
         ),
       ),
       spacer(),
@@ -369,11 +371,23 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
           return Container(
             height: _getItemHeight(),
             alignment: _getAlignment(),
-            child: Text(
-              text,
-              style: selectedIndex == index
-                  ? _getHighlightedTextStyle()
-                  : _getNormalTextStyle(),
+            decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                      color: Color(0xff5E3D9F)
+                  ),
+                  // bottom: BorderSide(
+                  //     color: Color(0xff5E3D9F)
+                  // ),
+                )
+            ),
+            child: Center(
+              child: Text(
+                text,
+                style: selectedIndex == index
+                    ? _getHighlightedTextStyle()
+                    : _getNormalTextStyle(),
+              ),
             ),
           );
         },
@@ -423,6 +437,16 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
           return Container(
             height: _getItemHeight(),
             alignment: Alignment.center,
+            decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                      color: text.isEmpty? Colors.transparent: Color(0xff5E3D9F)
+                  ),
+                   bottom: BorderSide(
+                      color: index == 2 ? Color(0xff5E3D9F):Colors.transparent
+                  ),
+                )
+            ),
             child: Text(
               text,
               style: currentSelectedAPIndex == index
@@ -448,3 +472,4 @@ class _TimePickerSpinnerState extends State<TimePickerSpinner> {
     );
   }
 }
+
